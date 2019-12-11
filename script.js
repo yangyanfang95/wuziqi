@@ -8,24 +8,24 @@ var wins = [];
 var myWin = [];
 var computerWin = [];
 
-for(var i = 0;i < 15;i++){
+for(var i = 0;i < 20;i++){
     chessBoard[i] = [];
-    for(var j = 0;j < 15;j++){
+    for(var j = 0;j < 20;j++){
         chessBoard[i][j] = 0;
     }
 }
 
-for(var i = 0;i < 15;i++){
+for(var i = 0;i < 20;i++){
     wins[i] = [];
-    for(var j = 0;j < 15;j++){
+    for(var j = 0;j < 20;j++){
         wins[i][j] = [];
     }
 }
 
 var count = 0;
 //所有横线赢法
-for(var i = 0;i < 15;i++){
-    for(var j = 0;j < 11;j++){
+for(var i = 0;i < 20;i++){
+    for(var j = 0;j < 16;j++){
         for(var k = 0;k < 5;k++){
             wins[i][j+k][count] = true;
         }
@@ -33,8 +33,8 @@ for(var i = 0;i < 15;i++){
     }
 }
 //所有竖线赢法
-for(var i = 0;i < 15;i++){
-    for(var j = 0;j < 11;j++){
+for(var i = 0;i < 20;i++){
+    for(var j = 0;j < 16;j++){
         for(var k = 0;k < 5;k++){
             wins[j+k][i][count] = true;
         }
@@ -42,8 +42,8 @@ for(var i = 0;i < 15;i++){
     }
 }
 //所有斜线赢法
-for(var i = 0;i < 11;i++){
-    for(var j = 0;j < 11;j++){
+for(var i = 0;i < 16;i++){
+    for(var j = 0;j < 16;j++){
         for(var k = 0;k < 5;k++){
             wins[i+k][j+k][count] = true;
         }
@@ -51,8 +51,8 @@ for(var i = 0;i < 11;i++){
     }
 }
 //所有反斜线赢法
-for(var i = 0;i < 11;i++){
-    for(var j = 14;j > 3;j--){
+for(var i = 0;i < 16;i++){
+    for(var j = 19;j > 3;j--){
         for(var k = 0;k < 5;k++){
             wins[i+k][j-k][count] = true;
         }
@@ -66,24 +66,26 @@ for(var i = 0;i < count;i++){
 }
 
 var chess = document.getElementById('chess');
+var win = document.getElementById('win');
+var lose = document.getElementById('lose');
 var context = chess.getContext('2d');
 
 context.strokeStyle = "#000";
 
 var logo = new Image();
-logo.src = "1.jpg";
+logo.src = "images/1.jpg";
 logo.onload = function(){
-    context.drawImage(logo,0,0,450,450);
+    context.drawImage(logo,0,0,600,600);
     drawChessBoard();
 }
 
 var drawChessBoard = function(){
-    for(var i = 0;i < 15;i++){
+    for(var i = 0;i < 20;i++){
         context.moveTo(15+i*30,15);
-        context.lineTo(15+i*30,435);
+        context.lineTo(15+i*30,585);
         context.stroke();
         context.moveTo(15,15+i*30);
-        context.lineTo(435,15+i*30);
+        context.lineTo(585,15+i*30);
         context.stroke();
     }
 }
@@ -129,7 +131,7 @@ chess.onclick = function(e){
                 myWin[k]++;
                 computerWin[k] = 6;
                 if(myWin[k] == 5){
-                    window.alert("你赢了");
+                    win.style.display = "block";
                     over = true;
                 }
             }
@@ -146,16 +148,16 @@ var computerAI = function(){
     var computerScore = [];
     var max = 0;//保存最高分数
     var u = 0,v = 0;//保存最高分数坐标
-    for(var i = 0;i < 15;i++){
+    for(var i = 0;i < 20;i++){
         myScore[i] = [];
         computerScore[i] = [];
-        for(var j = 0;j < 15;j++){
+        for(var j = 0;j < 20;j++){
             myScore[i][j] = 0;
             computerScore[i][j] = 0;
         }
     }
-    for(var i = 0;i < 15;i++){
-        for(var j = 0;j < 15;j++){
+    for(var i = 0;i < 20;i++){
+        for(var j = 0;j < 20;j++){
             if(chessBoard[i][j] == 0){
                 for(var k = 0;k < count;k++){
                     if(wins[i][j][k]){
@@ -209,7 +211,7 @@ var computerAI = function(){
             computerWin[k]++;
             myWin[k] = 6;
             if(computerWin[k] == 5){
-                window.alert("计算机赢了");
+                lose.style.display = "block";
                 over = true;
             }
         }
@@ -217,5 +219,4 @@ var computerAI = function(){
     if(!over){
         me = !me;
     }
-
 }

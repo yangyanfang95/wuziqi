@@ -4,9 +4,42 @@
     <meta charset="UTF-8"/>
     <title>五子棋</title>
     <link rel="stylesheet" href="style.css"/>
+    <script type="text/javascript" src="js/55ac9a860001a6c500000000.js"></script>
+    <script type="text/javascript" src="js/55ac9ea30001ace700000000.js"></script>
+    <script type="text/javascript" src="js/hua.js"></script>
 </head>
 <body>
-    <canvas id="chess" width="450px" height="450px"></canvas>
+    <div id="win"><img src="images/win.jpeg"/></div>
+    <div id="lose"><img src="images/lose.jpg"/></div>
+    <div>
+        <div class="options">
+            <h1>五子棋</h1>
+            <div id="new">新游戏</div>
+            <div id="colors">更换背景颜色<input type="color" id="changebgc"></div>
+            <div id="imgs">更换棋盘图片</div>
+            <div id="music">音效</div>
+            <div id="flower">特效</div>
+        </div>
+        <canvas id="chess" width="600px" height="600px"></canvas>
+    </div>
+    
+    <audio src="circulation.wav" id="music1" loop></audio>
+
+    <div id='content'>   
+        <div id="snowflake"></div>	
+    </div>
+
+    <div id="imgset">
+        <ul>
+            <li><img id="img1" src="images/1.jpg"/></li>
+            <li><img id="img2" src="images/2.jpg"/></li>
+            <li><img id="img3" src="images/3.jpg"/></li>
+            <li><img id="img4" src="images/4.jpg"/></li>
+            <li><img id="img5" src="images/5.jpg"/></li>
+        </ul>
+    </div>
+    
     <script src="script.js"></script>
+    <script src="js/options.js"></script>
 </body>
 </html>
